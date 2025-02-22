@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import ClientComponent from "@/components/client-component";
 import { Suspense } from "react";
+import ServerComponent from "@/components/server-component";
 
 export const metadata = {
   description:
@@ -12,16 +13,12 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const res = await fetch("http://localhost:8080/api/user", {
-    cache: "no-store",
-  });
-  const user = await res.json();
-  // console.log("user: " + JSON.stringify(user));
+  
   return (
     <main className="flex-1">
-      {/* <Suspense fallback="Loading..."> */}
-        <ClientComponent user={user} />
-      {/* </Suspense> */}
+      <Suspense fallback="Loading...">
+        <ServerComponent />
+      </Suspense>
       <section className="w-full pt-12 md:pt-24 lg:pt-32 border-bottom-b">
         <div className="px-4 md:px-6 space-y-10 xl:space-y-16">
           <div className="grid max-w-[1300px] mx-auto gap-4 px-4 sm:px-6 md:px-10 md:grid-cols-2 md:gap-16">
