@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+// import { use } from "react";
 
 type userType = {
   name: string,
@@ -8,11 +8,11 @@ type userType = {
 };
 
 export default function ClientComponent({
-  userPromise,
+  user,
 }: {
-  userPromise: Promise<userType>;
+  user: userType;
 }) {
-  const user = use(userPromise);
+//   const user = use(userPromise);
 
   return (
     <div>
