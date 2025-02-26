@@ -108,7 +108,7 @@ export async function removeItem(prevState: any, merchandiseId: string) {
   }
 }
 
-export async function redirectToCheckout() {
+export async function redirectToCheckout(formData: FormData): Promise<string> {
   let cartId = (await cookies()).get("cartId")?.value;
 
   if (!cartId) {

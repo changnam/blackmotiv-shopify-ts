@@ -21,6 +21,11 @@ type MerchandiseSearchParams = {
   [key: string]: string;
 };
 
+const handleRedirectToCheckout = async (formData: FormData) => {
+  const result = await redirectToCheckout(formData);
+  // setMessage(result);
+};
+
 export default function CartModal() {
   const { cart, updateCartItem } = useCart();
   const [isOpen, setIsOpen] = useState(false);
@@ -212,7 +217,7 @@ export default function CartModal() {
                       />
                     </div>
                   </div>
-                  <form action={redirectToCheckout}>
+                  <form action={handleRedirectToCheckout}>
                     <CheckoutButton />
                   </form>
                 </div>

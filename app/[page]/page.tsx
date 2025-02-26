@@ -1,14 +1,18 @@
 import Prose from "@/components/prose";
 import { getPage } from "@/lib/shopify";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { page: string };
-}): Promise<Metadata> {
-  const page = await getPage(params.page);
+type Props = {
+  params: Promise<{ page: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const page = await getPage((await params).page);
 
   if (!page) return notFound();
 
@@ -23,8 +27,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { page: string } }) {
-  const page = await getPage(params.page);
+export default async function Page({ params, searchParams }: Props) {
+  const page = await getPage((await params).page);
 
   if (!page) return notFound();
 
