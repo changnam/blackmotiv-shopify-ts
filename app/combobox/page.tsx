@@ -5,6 +5,7 @@ import {
   ComboboxInput,
   ComboboxOption,
   ComboboxOptions,
+  Description,
   Field,
   Label,
 } from "@headlessui/react";
@@ -32,6 +33,9 @@ export default function Example() {
   return (
     <Field>
       <Label>Assignee:</Label>
+      <Description>
+        This person will have full access to this project.
+      </Description>
       <Combobox
         value={selectedPerson}
         onChange={setSelectedPerson}
