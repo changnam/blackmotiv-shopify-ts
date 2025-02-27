@@ -8,12 +8,14 @@ export default function Example() {
 
   return (
     <Checkbox
+      as="div"
       checked={enabled}
       onChange={setEnabled}
-      className="group block size-4 rounded border bg-white transition duration-[3s,5s] data-[checked]:bg-blue-500"
+      name="blabla"
+      className="group block size-4 rounded border bg-white data-[checked]:bg-blue-500"
     >
       <svg
-        className="stroke-white opacity-0 transition group-data-[checked]:opacity-100"
+        className="stroke-white opacity-0 group-data-[checked]:opacity-100"
         viewBox="0 0 14 14"
         fill="none"
       >
