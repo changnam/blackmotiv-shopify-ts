@@ -41,7 +41,8 @@ export default function Example() {
       />
       <ComboboxOptions
         anchor="bottom"
-        className="w-[var(--input-width)] border empty:invisible"
+        transition
+        className="origin-top border transition duration-200 ease-out empty:invisible data-[closed]:scale-95 data-[closed]:opacity-0"
       >
         {filteredPeople.map((person) => (
           <ComboboxOption
