@@ -17,16 +17,14 @@ const people = [
 ];
 
 export default function Example() {
-  const [selectedPerson, setSelectedPerson] = useState(people[0]);
+  const [selectedPeople, setSelectedPeople] = useState([people[0], people[1]]);
 
   return (
-    <Listbox value={selectedPerson} onChange={setSelectedPerson}>
-      <ListboxButton>{selectedPerson.name}</ListboxButton>
-      <ListboxOptions
-        anchor="bottom"
-        transition
-        className="origin-top transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
-      >
+    <Listbox value={selectedPeople} onChange={setSelectedPeople} multiple>
+      <ListboxButton>
+        {selectedPeople.map((person) => person.name).join(", ")}
+      </ListboxButton>
+      <ListboxOptions anchor="bottom">
         {people.map((person) => (
           <ListboxOption
             key={person.id}
