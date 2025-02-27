@@ -37,11 +37,9 @@ export default function Example() {
         aria-label="Assignee"
         displayValue={(person) => person?.name}
         onChange={(event) => setQuery(event.target.value)}
+        className="border"
       />
-      <ComboboxOptions
-        anchor={{ to: "bottom start", gap: "4px" ,offset: "4px" ,padding: "4px" }}
-        className="border empty:invisible"
-      >
+      <ComboboxOptions anchor="bottom" className="w-52 border empty:invisible">
         {filteredPeople.map((person) => (
           <ComboboxOption
             key={person.id}
