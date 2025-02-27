@@ -1,13 +1,17 @@
 "use client";
 
+import { Checkbox, Description, Field, Label } from "@headlessui/react";
 import { useState } from "react";
-import { Checkbox, Field, Label } from "@headlessui/react";
 
 export default function Example() {
   const [enabled, setEnabled] = useState(false);
 
   return (
-    <Field className="flex items-center gap-2">
+    <Field>
+      <Label>Enable beta features</Label>
+      <Description>
+        This will give you early access to new features we're developing.
+      </Description>
       <Checkbox
         checked={enabled}
         onChange={setEnabled}
@@ -26,7 +30,6 @@ export default function Example() {
           />
         </svg>
       </Checkbox>
-      <Label passive>Enable beta features</Label>
     </Field>
   );
 }
