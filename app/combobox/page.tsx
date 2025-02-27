@@ -5,17 +5,15 @@ import {
   ComboboxInput,
   ComboboxOption,
   ComboboxOptions,
-  Field,
-  Label,
 } from "@headlessui/react";
 import { useState } from "react";
 
 const people = [
-  { id: 1, name: "Durward Reynolds" },
-  { id: 2, name: "Kenton Towne" },
-  { id: 3, name: "Therese Wunsch" },
-  { id: 4, name: "Benedict Kessler" },
-  { id: 5, name: "Katelyn Rohan" },
+  { id: 1, name: "Durward Reynolds", available: true },
+  { id: 2, name: "Kenton Towne", available: true },
+  { id: 3, name: "Therese Wunsch", available: true },
+  { id: 4, name: "Benedict Kessler", available: false },
+  { id: 5, name: "Katelyn Rohan", available: true },
 ];
 
 export default function Example() {
@@ -30,29 +28,29 @@ export default function Example() {
         });
 
   return (
-    <Field disabled>
-      <Label>Assignee:</Label>
-      <Combobox
-        value={selectedPerson}
-        onChange={setSelectedPerson}
-        onClose={() => setQuery("")}
-      >
-        <ComboboxInput
-          displayValue={(person) => person?.name}
-          onChange={(event) => setQuery(event.target.value)}
-        />
-        <ComboboxOptions anchor="bottom" className="border empty:invisible">
-          {filteredPeople.map((person) => (
-            <ComboboxOption
-              key={person.id}
-              value={person}
-              className="data-[focus]:bg-blue-100"
-            >
-              {person.name}
-            </ComboboxOption>
-          ))}
-        </ComboboxOptions>
-      </Combobox>
-    </Field>
+    <Combobox
+      value={selectedPerson}
+      onChange={setSelectedPerson}
+      onClose={() => setQuery("")}
+    >
+      <ComboboxInput
+        aria-label="Assignee"
+        displayValue={(person) => person?.name}
+        onChange={(event) => setQuery(event.target.value)}
+        className="border border-gray-300 "
+      />
+      <ComboboxOptions anchor="bottom" className="border empty:invisible">
+        {filteredPeople.map((person) => (
+          <ComboboxOption
+            key={person.id}
+            value={person}
+            disabled={!person.available}
+            className="data-[focus]:bg-blue-100 data-[disabled]:opacity-50"
+          >
+            {person.name}
+          </ComboboxOption>
+        ))}
+      </ComboboxOptions>
+    </Combobox>
   );
 }
