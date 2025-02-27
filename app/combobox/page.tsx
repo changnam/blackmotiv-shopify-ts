@@ -17,7 +17,6 @@ const people = [
 ];
 
 export default function Example() {
-  const [selectedPerson, setSelectedPerson] = useState(people[0]);
   const [query, setQuery] = useState("");
 
   const filteredPeople =
@@ -28,11 +27,10 @@ export default function Example() {
         });
 
   return (
-    <form action="http://localhost:8080/api/posts/1/like" method="post">
+    <form action="http:/localhost:8080/api/posts/1/like" method="post">
       <Combobox
         name="assignee"
-        value={selectedPerson}
-        onChange={setSelectedPerson}
+        defaultValue={people[0]}
         onClose={() => setQuery("")}
       >
         <ComboboxInput
