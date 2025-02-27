@@ -10,7 +10,7 @@ import {
 
 export default function Example() {
   return (
-    <Fieldset className="space-y-8 border border-gray-300">
+    <Fieldset disabled className="space-y-8 data-[disabled]:opacity-50">
       <Legend className="text-lg font-bold">Shipping details</Legend>
       <Field>
         <Label className="block">Street address</Label>
