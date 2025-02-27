@@ -26,7 +26,7 @@ export default function Example() {
           />
         </svg>
       </Checkbox>
-      <Label>Enable beta features</Label>
+      <Label passive>Enable beta features</Label>
     </Field>
   );
 }
