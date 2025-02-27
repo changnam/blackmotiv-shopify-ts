@@ -9,20 +9,24 @@ import {
 import { useState } from "react";
 
 const departments = [
-  { name: "Marketing", contact: "Durward Reynolds" },
-  { name: "HR", contact: "Kenton Towne" },
-  { name: "Sales", contact: "Therese Wunsch" },
-  { name: "Finance", contact: "Benedict Kessler" },
-  { name: "Customer service", contact: "Katelyn Rohan" },
+  { id: 1, name: "Marketing", contact: "Durward Reynolds" },
+  { id: 2, name: "HR", contact: "Kenton Towne" },
+  { id: 3, name: "Sales", contact: "Therese Wunsch" },
+  { id: 4, name: "Finance", contact: "Benedict Kessler" },
+  { id: 5, name: "Customer service", contact: "Katelyn Rohan" },
 ];
+
+function compareDepartments(a, b) {
+  return a.name.toLowerCase() === b.name.toLowerCase();
+}
 
 export default function DepartmentPicker({ selectedDepartment }) {
   const [query, setQuery] = useState("");
 
   function onChange(department) {
-    console.log("Selected department:", department);
+    selectedDepartment = department;
   }
-  
+
   const filteredDepartments =
     query === ""
       ? departments
@@ -33,7 +37,7 @@ export default function DepartmentPicker({ selectedDepartment }) {
   return (
     <Combobox
       value={selectedDepartment}
-      by="name"
+      by={compareDepartments}
       onChange={onChange}
       onClose={() => setQuery("")}
     >
@@ -46,7 +50,7 @@ export default function DepartmentPicker({ selectedDepartment }) {
       <ComboboxOptions anchor="bottom" className="border empty:invisible">
         {filteredDepartments.map((department) => (
           <ComboboxOption
-            key={department.name}
+            key={department.id}
             value={department}
             className="data-[focus]:bg-blue-100"
           >
