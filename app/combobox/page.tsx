@@ -1,59 +1,9 @@
-"use client";
+import DepartmentPicker from "@/components/department-picker";
 
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxOption,
-  ComboboxOptions,
-} from "@headlessui/react";
-import { useState } from "react";
-
-const people = [
-  { id: 1, name: "Durward Reynolds" },
-  { id: 2, name: "Kenton Towne" },
-  { id: 3, name: "Therese Wunsch" },
-  { id: 4, name: "Benedict Kessler" },
-  { id: 5, name: "Katelyn Rohan" },
-];
-
-export default function Example() {
-  const [selectedPerson, setSelectedPerson] = useState(people[0]);
-  const [query, setQuery] = useState("");
-
-  const filteredPeople =
-    query === ""
-      ? people
-      : people.filter((person) => {
-          return person.name.toLowerCase().includes(query.toLowerCase());
-        });
-
+export default function ComboboxPage() {
   return (
-    <Combobox
-      value={selectedPerson}
-      onChange={setSelectedPerson}
-      onClose={() => setQuery("")}
-    >
-      <ComboboxInput
-        aria-label="Assignee"
-        displayValue={(person) => person?.name}
-        onChange={(event) => setQuery(event.target.value)}
-        className="border"
-      />
-      <ComboboxOptions
-        anchor="bottom"
-        transition
-        className="origin-top border transition duration-200 ease-out empty:invisible data-[closed]:scale-95 data-[closed]:opacity-0"
-      >
-        {filteredPeople.map((person) => (
-          <ComboboxOption
-            key={person.id}
-            value={person}
-            className="data-[focus]:bg-blue-100"
-          >
-            {person.name}
-          </ComboboxOption>
-        ))}
-      </ComboboxOptions>
-    </Combobox>
+    <div>
+      <DepartmentPicker selectedDepartment={{name: "Marketing", contact: "Durward Reynolds"}}  />
+    </div>
   );
 }
