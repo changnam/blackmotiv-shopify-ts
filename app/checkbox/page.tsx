@@ -1,16 +1,10 @@
-"use client";
-
 import { Checkbox } from "@headlessui/react";
-import { useState } from "react";
 
 export default function Example() {
-  const [enabled, setEnabled] = useState(false);
-
   return (
     <form action="http://localhost:8080/api/posts/1/like" method="post">
       <Checkbox
-        checked={enabled}
-        onChange={setEnabled}
+        defaultChecked={true}
         name="terms-of-service"
         className="group block size-4 rounded border bg-white data-[checked]:bg-blue-500"
       >
