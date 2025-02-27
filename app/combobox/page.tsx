@@ -6,7 +6,9 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from "@headlessui/react";
-import { useState } from "react";
+import { CheckIcon } from "@heroicons/react/20/solid";
+import clsx from "clsx";
+import { Fragment, useState } from "react";
 
 const people = [
   { id: 1, name: "Durward Reynolds" },
@@ -41,11 +43,17 @@ export default function Example() {
       <ComboboxOptions anchor="bottom" className="border empty:invisible">
         {filteredPeople.map((person) => (
           <ComboboxOption
+            as={Fragment}
             key={person.id}
             value={person}
             className="data-[focus]:bg-blue-100"
           >
-            {person.name}
+            {({ focus, selected }) => (
+              <div className={clsx("group flex gap-2", focus && "bg-blue-100")}>
+                {selected && <CheckIcon className="size-5" />}
+                {person.name}
+              </div>
+            )}
           </ComboboxOption>
         ))}
       </ComboboxOptions>
