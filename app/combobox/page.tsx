@@ -28,36 +28,32 @@ export default function Example() {
         });
 
   return (
-    <Combobox
-      value={selectedPerson}
-      onChange={setSelectedPerson}
-      onClose={() => setQuery("")}
-    >
-      <ComboboxInput
-        aria-label="Assignee"
-        displayValue={(person) => person?.name}
-        onChange={(event) => setQuery(event.target.value)}
-        className="border border-gray-300"
-      />
-      <ComboboxOptions anchor="bottom" className="border empty:invisible">
-        {query.length > 0 && (
-          <ComboboxOption
-            value={{ id: null, name: query }}
-            className="data-[focus]:bg-blue-100"
-          >
-            Create <span className="font-bold">"{query}"</span>
-          </ComboboxOption>
-        )}
-        {filteredPeople.map((person) => (
-          <ComboboxOption
-            key={person.id}
-            value={person}
-            className="data-[focus]:bg-blue-100"
-          >
-            {person.name}
-          </ComboboxOption>
-        ))}
-      </ComboboxOptions>
-    </Combobox>
+    <form action="http://localhost:8080/api/posts/1/like" method="post">
+      <Combobox
+        name="assignee"
+        value={selectedPerson}
+        onChange={setSelectedPerson}
+        onClose={() => setQuery("")}
+      >
+        <ComboboxInput
+          aria-label="Assignee"
+          displayValue={(person) => person?.name}
+          onChange={(event) => setQuery(event.target.value)}
+          className="border border-gray-300"
+        />
+        <ComboboxOptions anchor="bottom" className="border empty:invisible">
+          {filteredPeople.map((person) => (
+            <ComboboxOption
+              key={person.id}
+              value={person}
+              className="data-[focus]:bg-blue-100"
+            >
+              {person.name}
+            </ComboboxOption>
+          ))}
+        </ComboboxOptions>
+      </Combobox>
+      <button>Submit</button>
+    </form>
   );
 }
