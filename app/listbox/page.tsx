@@ -20,9 +20,13 @@ export default function Example() {
   const [selectedPerson, setSelectedPerson] = useState(people[0]);
 
   return (
-    <Listbox horizontal value={selectedPerson} onChange={setSelectedPerson}>
+    <Listbox value={selectedPerson} onChange={setSelectedPerson}>
       <ListboxButton>{selectedPerson.name}</ListboxButton>
-      <ListboxOptions anchor="bottom" className="flex flex-row">
+      <ListboxOptions
+        anchor="bottom"
+        transition
+        className="origin-top transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
+      >
         {people.map((person) => (
           <ListboxOption
             key={person.id}
