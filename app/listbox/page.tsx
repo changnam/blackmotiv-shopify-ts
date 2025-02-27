@@ -22,7 +22,7 @@ export default function Example() {
   return (
     <Listbox value={selectedPerson} onChange={setSelectedPerson}>
       <ListboxButton>{selectedPerson.name}</ListboxButton>
-      <ListboxOptions anchor="bottom" className="w-52 border border-gray-300">
+      <ListboxOptions anchor={{ to: "bottom start", gap: "10px" , offset: "-30px", padding: "10px"}}>
         {people.map((person) => (
           <ListboxOption
             key={person.id}
