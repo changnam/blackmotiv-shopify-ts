@@ -17,6 +17,7 @@ const people = [
 ];
 
 export default function Example() {
+  const [selectedPerson, setSelectedPerson] = useState(people[0]);
   const [query, setQuery] = useState("");
 
   const filteredPeople =
@@ -27,31 +28,28 @@ export default function Example() {
         });
 
   return (
-    <form action="http:/localhost:8080/api/posts/1/like" method="post">
-      <Combobox
-        name="assignee"
-        defaultValue={people[0]}
-        onClose={() => setQuery("")}
-      >
-        <ComboboxInput
-          aria-label="Assignee"
-          displayValue={(person) => person?.name}
-          onChange={(event) => setQuery(event.target.value)}
-          className="border border-gray-300"
-        />
-        <ComboboxOptions anchor="bottom" className="border empty:invisible">
-          {filteredPeople.map((person) => (
-            <ComboboxOption
-              key={person.id}
-              value={person}
-              className="data-[focus]:bg-blue-100"
-            >
-              {person.name}
-            </ComboboxOption>
-          ))}
-        </ComboboxOptions>
-      </Combobox>
-      <button>Submit</button>
-    </form>
+    <Combobox
+      value={selectedPerson}
+      onChange={setSelectedPerson}
+      onClose={() => setQuery("")}
+    >
+      <ComboboxInput
+        aria-label="Assignee"
+        displayValue={(person) => person?.name}
+        onChange={(event) => setQuery(event.target.value)}
+        className="border border-gray-300"
+      />
+      <ComboboxOptions anchor="bottom end" className="border empty:invisible">
+        {filteredPeople.map((person) => (
+          <ComboboxOption
+            key={person.id}
+            value={person}
+            className="data-[focus]:bg-blue-100"
+          >
+            {person.name}
+          </ComboboxOption>
+        ))}
+      </ComboboxOptions>
+    </Combobox>
   );
 }
