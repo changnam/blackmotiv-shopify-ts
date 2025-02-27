@@ -9,11 +9,11 @@ import {
 import { useState } from "react";
 
 const people = [
-  { id: 1, name: "Durward Reynolds", available: true },
-  { id: 2, name: "Kenton Towne", available: true },
-  { id: 3, name: "Therese Wunsch", available: true },
-  { id: 4, name: "Benedict Kessler", available: false },
-  { id: 5, name: "Katelyn Rohan", available: true },
+  { id: 1, name: "Durward Reynolds" },
+  { id: 2, name: "Kenton Towne" },
+  { id: 3, name: "Therese Wunsch" },
+  { id: 4, name: "Benedict Kessler" },
+  { id: 5, name: "Katelyn Rohan" },
 ];
 
 export default function Example() {
@@ -37,15 +37,22 @@ export default function Example() {
         aria-label="Assignee"
         displayValue={(person) => person?.name}
         onChange={(event) => setQuery(event.target.value)}
-        className="border border-gray-300 "
+        className="border border-gray-300"
       />
       <ComboboxOptions anchor="bottom" className="border empty:invisible">
+        {query.length > 0 && (
+          <ComboboxOption
+            value={{ id: null, name: query }}
+            className="data-[focus]:bg-blue-100"
+          >
+            Create <span className="font-bold">"{query}"</span>
+          </ComboboxOption>
+        )}
         {filteredPeople.map((person) => (
           <ComboboxOption
             key={person.id}
             value={person}
-            disabled={!person.available}
-            className="data-[focus]:bg-blue-100 data-[disabled]:opacity-50"
+            className="data-[focus]:bg-blue-100"
           >
             {person.name}
           </ComboboxOption>
