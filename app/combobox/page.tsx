@@ -5,10 +5,10 @@ import {
   ComboboxInput,
   ComboboxOption,
   ComboboxOptions,
+  Field,
+  Label,
 } from "@headlessui/react";
-import { CheckIcon } from "@heroicons/react/20/solid";
-import clsx from "clsx";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 const people = [
   { id: 1, name: "Durward Reynolds" },
@@ -30,33 +30,29 @@ export default function Example() {
         });
 
   return (
-    <Combobox
-      value={selectedPerson}
-      onChange={setSelectedPerson}
-      onClose={() => setQuery("")}
-    >
-      <ComboboxInput
-        aria-label="Assignee"
-        displayValue={(person) => person?.name}
-        onChange={(event) => setQuery(event.target.value)}
-      />
-      <ComboboxOptions anchor="bottom" className="border empty:invisible">
-        {filteredPeople.map((person) => (
-          <ComboboxOption
-            as={Fragment}
-            key={person.id}
-            value={person}
-            className="data-[focus]:bg-blue-100"
-          >
-            {({ focus, selected }) => (
-              <div className={clsx("group flex gap-2", focus && "bg-blue-100")}>
-                {selected && <CheckIcon className="size-5" />}
-                {person.name}
-              </div>
-            )}
-          </ComboboxOption>
-        ))}
-      </ComboboxOptions>
-    </Combobox>
+    <Field>
+      <Label>Assignee:</Label>
+      <Combobox
+        value={selectedPerson}
+        onChange={setSelectedPerson}
+        onClose={() => setQuery("")}
+      >
+        <ComboboxInput
+          displayValue={(person) => person?.name}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+        <ComboboxOptions anchor="bottom" className="border empty:invisible">
+          {filteredPeople.map((person) => (
+            <ComboboxOption
+              key={person.id}
+              value={person}
+              className="data-[focus]:bg-blue-100"
+            >
+              {person.name}
+            </ComboboxOption>
+          ))}
+        </ComboboxOptions>
+      </Combobox>
+    </Field>
   );
 }
