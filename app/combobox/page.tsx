@@ -39,7 +39,10 @@ export default function Example() {
         onChange={(event) => setQuery(event.target.value)}
         className="border border-gray-300"
       />
-      <ComboboxOptions anchor="bottom end" className="border empty:invisible">
+      <ComboboxOptions
+        anchor="bottom start"
+        className="border [--anchor-gap:4px] empty:invisible sm:[--anchor-gap:8px]"
+      >
         {filteredPeople.map((person) => (
           <ComboboxOption
             key={person.id}
