@@ -1,46 +1,57 @@
 "use client";
 import { useState } from "react";
-import { Listbox } from "@headlessui/react";
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/react";
 
-const fruits = ["Apple", "Banana", "Cherry", "Grapes", "Mango"];
+const fruits = [
+  { id: 1, name: "Apple" },
+  { id: 2, name: "Banana" },
+  { id: 3, name: "Cherry" },
+  { id: 4, name: "Grapes" },
+  { id: 5, name: "Mango" },
+];
 
 export default function MultiSelectListbox() {
-  const [selectedFruits, setSelectedFruits] = useState<string[]>([]);
+  const [selectedFruits, setSelectedFruits] = useState<
+    { id: number; name: string }[]
+  >([]);
 
-  const toggleSelection = (fruit: string) => {
-    if (selectedFruits.includes(fruit)) {
-      // If already selected, remove it (unselect)
-      setSelectedFruits(selectedFruits.filter((item) => item !== fruit));
+  const toggleSelection = (fruit: { id: number; name: string }) => {
+    console.log("toggleSelection", fruit);
+    const isSelected = selectedFruits.some((f) => f.id === fruit.id);
+    if (isSelected) {
+      // Unselect if already selected
+      setSelectedFruits(selectedFruits.filter((f) => f.id !== fruit.id));
     } else {
-      // Otherwise, add it (select)
+      // Select if not selected
       setSelectedFruits([...selectedFruits, fruit]);
     }
   };
 
   return (
-    <div>
+    <div className="w-64">
       <Listbox value={selectedFruits} onChange={setSelectedFruits} multiple>
-        <Listbox.Button className="border p-2 rounded">
+        <ListboxButton className="border p-2 rounded w-full text-left">
           {selectedFruits.length > 0
-            ? selectedFruits.join(", ")
+            ? selectedFruits.map((f) => f.name).join(", ")
             : "Select fruits"}
-        </Listbox.Button>
-        <Listbox.Options className="border rounded mt-1 p-1 bg-white">
+        </ListboxButton>
+        <ListboxOptions className="border rounded mt-1 bg-white">
           {fruits.map((fruit) => (
-            <Listbox.Option
-              key={fruit}
+            <ListboxOption
+              key={fruit.id}
               value={fruit}
               onClick={() => toggleSelection(fruit)}
-              className={`p-2 cursor-pointer ${
-                selectedFruits.includes(fruit)
+              className={`p-2 cursor-pointer flex justify-between ${
+                selectedFruits.some((f) => f.id === fruit.id)
                   ? "bg-blue-500 text-white"
                   : "hover:bg-gray-200"
               }`}
             >
-              {fruit}
-            </Listbox.Option>
+              {fruit.name}
+              {selectedFruits.some((f) => f.id === fruit.id) && <span>✅</span>}
+            </ListboxOption>
           ))}
-        </Listbox.Options>
+        </ListboxOptions>
       </Listbox>
     </div>
   );
