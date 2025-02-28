@@ -1,58 +1,42 @@
 "use client";
-import { useState } from "react";
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/react";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+} from "@headlessui/react";
+import { forwardRef, useState } from "react";
 
-const fruits = [
-  { id: 1, name: "Apple" },
-  { id: 2, name: "Banana" },
-  { id: 3, name: "Cherry" },
-  { id: 4, name: "Grapes" },
-  { id: 5, name: "Mango" },
+const people = [
+  { id: 1, name: "Durward Reynolds" },
+  { id: 2, name: "Kenton Towne" },
+  { id: 3, name: "Therese Wunsch" },
+  { id: 4, name: "Benedict Kessler" },
+  { id: 5, name: "Katelyn Rohan" },
 ];
 
-export default function MultiSelectListbox() {
-  const [selectedFruits, setSelectedFruits] = useState<
-    { id: number; name: string }[]
-  >([]);
+let MyCustomButton = forwardRef(function (props, ref) {
+  return <button className="bg-green-200" ref={ref} {...props} />;
+});
 
-  const toggleSelection = (fruit: { id: number; name: string }) => {
-    console.log("toggleSelection", fruit);
-    const isSelected = selectedFruits.some((f) => f.id === fruit.id);
-    if (isSelected) {
-      // Unselect if already selected
-      setSelectedFruits(selectedFruits.filter((f) => f.id !== fruit.id));
-    } else {
-      // Select if not selected
-      setSelectedFruits([...selectedFruits, fruit]);
-    }
-  };
+export default function Example() {
+  const [selectedPerson, setSelectedPerson] = useState(people[0]);
 
   return (
-    <div className="w-64">
-      <Listbox value={selectedFruits} onChange={setSelectedFruits} multiple>
-        <ListboxButton className="border p-2 rounded w-full text-left">
-          {selectedFruits.length > 0
-            ? selectedFruits.map((f) => f.name).join(", ")
-            : "Select fruits"}
-        </ListboxButton>
-        <ListboxOptions className="border rounded mt-1 bg-white">
-          {fruits.map((fruit) => (
-            <ListboxOption
-              key={fruit.id}
-              value={fruit}
-              onClick={() => toggleSelection(fruit)}
-              className={`p-2 cursor-pointer flex justify-between ${
-                selectedFruits.some((f) => f.id === fruit.id)
-                  ? "bg-blue-500 text-white"
-                  : "hover:bg-gray-200"
-              }`}
-            >
-              {fruit.name}
-              {selectedFruits.some((f) => f.id === fruit.id) && <span>✅</span>}
-            </ListboxOption>
-          ))}
-        </ListboxOptions>
-      </Listbox>
-    </div>
+    <Listbox value={selectedPerson} onChange={setSelectedPerson}>
+      <ListboxButton as={MyCustomButton}>{selectedPerson.name}</ListboxButton>
+      <ListboxOptions anchor="bottom" as="ul">
+        {people.map((person) => (
+          <ListboxOption
+            as="li"
+            key={person.id}
+            value={person}
+            className="data-[focus]:bg-blue-100"
+          >
+            {person.name}
+          </ListboxOption>
+        ))}
+      </ListboxOptions>
+    </Listbox>
   );
 }
