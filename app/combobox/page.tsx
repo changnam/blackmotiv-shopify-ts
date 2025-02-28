@@ -2,11 +2,12 @@
 
 import {
   Combobox,
+  ComboboxButton,
   ComboboxInput,
   ComboboxOption,
   ComboboxOptions,
 } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { forwardRef, useState } from "react";
 
 const people = [
   { id: 1, name: "Durward Reynolds" },
@@ -15,6 +16,10 @@ const people = [
   { id: 4, name: "Benedict Kessler" },
   { id: 5, name: "Katelyn Rohan" },
 ];
+
+let MyCustomButton = forwardRef(function (props, ref) {
+  return <button className="bg-green-300" ref={ref} {...props} />;
+});
 
 export default function Example() {
   const [selectedPerson, setSelectedPerson] = useState(people[0]);
@@ -34,17 +39,20 @@ export default function Example() {
       onClose={() => setQuery("")}
     >
       <ComboboxInput
-        as={Fragment}
         aria-label="Assignee"
         displayValue={(person) => person?.name}
         onChange={(event) => setQuery(event.target.value)}
         className="border"
+      />
+      <ComboboxButton as={MyCustomButton}>Open</ComboboxButton>
+      <ComboboxOptions
+        as="ul"
+        anchor="bottom"
+        className="border empty:invisible"
       >
-        <input />
-      </ComboboxInput>
-      <ComboboxOptions anchor="bottom" className="border empty:invisible">
         {filteredPeople.map((person) => (
           <ComboboxOption
+            as="li"
             key={person.id}
             value={person}
             className="data-[focus]:bg-blue-100"
