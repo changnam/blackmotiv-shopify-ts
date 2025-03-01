@@ -1,6 +1,6 @@
 import AddPostForm from "@/components/add-post-form";
 import ListPosts from "@/components/list-posts";
-import { addPostApi } from "@/lib/actions";
+import { addPostApi, deletePostApi } from "@/lib/actions";
 import { Suspense } from "react";
 
 export default async function postsPage() {
@@ -15,7 +15,7 @@ export default async function postsPage() {
         <AddPostForm addPostApi={addPostApi} />
       </Suspense>
       <Suspense fallback={<div>Loading list posts ...</div>}>
-        <ListPosts posts={posts.data} />
+        <ListPosts posts={posts.data} deletePostApi={deletePostApi} />
       </Suspense>
     </div>
   );

@@ -58,3 +58,17 @@ export async function addPost(prevState: any, formData: FormData) {
     throw e;
   }
 }
+
+export async function deletePostApi(postId: number) {
+  console.log("deletePostApi started.");
+  const res = await fetch(`http://localhost:8080/api/posts/${postId}`, {
+    method: "DELETE",
+  });
+
+  const data = await res.json();
+
+  revalidatePath("/posts"); // ✅ Works properly
+  console.log("deletePostApi finished.");
+
+  return data;
+}
