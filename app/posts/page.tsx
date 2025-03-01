@@ -1,29 +1,22 @@
-"use client";
+import AddPostForm from "@/components/add-post-form";
+import ListPosts from "@/components/list-posts";
+import { addPostApi } from "@/lib/actions";
+import { Suspense } from "react";
 
-import { useActionState } from "react";
-import { addPost, addPostApi } from "@/lib/actions";
-
-export default function AddPostForm() {
-  const [state, formAction, isPending] = useActionState(addPostApi, null);
-
+export default async function postsPage() {
+  console.log("@@@@@@@@@@@@@@@ postsPage started.");
+  const res = await fetch("http://localhost:8080/api/posts");
+  const posts = await res.json();
+  console.log("@@@@@@@@@@@@@@@ postsPage ended.");
   return (
-    <form action={formAction}>
-      <input
-        type="text"
-        name="title"
-        placeholder="Post title"
-        className="border p-2"
-      />
-      <button
-        type="submit"
-        disabled={isPending}
-        className="bg-blue-500 text-white p-2"
-      >
-        {isPending ? "Adding..." : "Add Post"}
-      </button>
-
-      {state?.success && <p className="text-green-500">{state.success}</p>}
-      {state?.error && <p className="text-red-500">{state.error}</p>}
-    </form>
+    <div>
+      <h1 className="text-3xl font-bold">Posts</h1>
+      <Suspense fallback={<div>Loading form ...</div>}>
+        <AddPostForm addPostApi={addPostApi} />
+      </Suspense>
+      <Suspense fallback={<div>Loading list posts ...</div>}>
+        <ListPosts posts={posts.data} />
+      </Suspense>
+    </div>
   );
 }
