@@ -1,8 +1,9 @@
 "use client";
 
+import { time } from "console";
 import React, { useEffect, useState } from "react";
 
-const MyContext = React.createContext({});
+const MyContext = React.createContext({time: "", setTime: (time: string) => {}});
 
 export function MyContextProvider({children}: {children: React.ReactNode}) {
   const [time, setTime] = useState("");
