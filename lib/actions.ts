@@ -1,8 +1,10 @@
 "use server";
 import { PrismaClient, Prisma } from "@prisma/client";
 import { prisma } from "./prisma"; // Example using Prisma
+import { revalidatePath } from "next/cache";
 
-export async function addPostApi(prevState: any, formData: FormData){
+export async function addPostApi(prevState: any, formData: FormData) {
+  console.log("addPostApi started.");
   const jsonObj = Object.fromEntries(formData.entries());
   const res = await fetch("http://localhost:8080/api/posts", {
     method: "POST",
@@ -13,9 +15,23 @@ export async function addPostApi(prevState: any, formData: FormData){
   });
 
   const data = await res.json();
+
+  console.log("revalidatePath started.");
+  // Promise.resolve("Successful").then((result) => {
+  //   console.log("promise callback started");
+  //   revalidatePath("/posts");
+  // });
+
+  // new Promise((resolve) => setTimeout(resolve, 5000)).then(() => {
+  //   console.log("promise callback started");
+  //   revalidatePath("/posts");
+  // }); // ✅ Works properly
+
+  revalidatePath("/posts"); // ✅ Works properly
+  console.log("revalidatePath finished.");
+
   return data;
 }
-
 
 export async function addPost(prevState: any, formData: FormData) {
   const title = formData.get("title");
@@ -27,7 +43,7 @@ export async function addPost(prevState: any, formData: FormData) {
 
   try {
     const post = await prisma.post.create({
-      data: { title: title.toString() ,content: content.toString() },
+      data: { title: title.toString(), content: content.toString() },
     });
     return { success: "Post created successfully", post };
   } catch (e) {
