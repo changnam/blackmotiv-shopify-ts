@@ -1,10 +1,10 @@
 "use client";
 
 import { useActionState } from "react";
-import { addPost } from "@/lib/actions";
+import { addPost, addPostApi } from "@/lib/actions";
 
 export default function AddPostForm() {
-  const [state, formAction, isPending] = useActionState(addPost, null);
+  const [state, formAction, isPending] = useActionState(addPostApi, null);
 
   return (
     <form action={formAction}>
