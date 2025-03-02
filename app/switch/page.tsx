@@ -6,15 +6,16 @@ export default function Example() {
   const [enabled, setEnabled] = useState(false);
 
   return (
-    <Switch
-      checked={enabled}
-      onChange={setEnabled}
-      className="group relative flex h-7 w-14 cursor-pointer rounded-full bg-black/10 p-1 transition-colors duration-200 ease-in-out focus:outline-none data-[focus]:outline-1 data-[focus]:outline-black data-[checked]:bg-black/10"
-    >
-      <span
-        aria-hidden="true"
-        className="pointer-events-none inline-block size-5 translate-x-0 rounded-full bg-black ring-0 shadow-lg transition duration-200 ease-in-out group-data-[checked]:translate-x-7"
-      />
-    </Switch>
+    <form action="http://localhost:8080/api/posts/1/like" method="post">
+      <Switch
+        checked={enabled}
+        onChange={setEnabled}
+        name="terms-of-service"
+        className="group inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition data-[checked]:bg-blue-600"
+      >
+        <span className="size-4 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-6" />
+      </Switch>
+      <button>Submit</button>
+    </form>
   );
 }
