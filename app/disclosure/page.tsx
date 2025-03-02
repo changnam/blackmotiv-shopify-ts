@@ -1,30 +1,37 @@
 "use client";
+
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
+  useClose,
 } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import clsx from "clsx";
 
-const Example: React.FC = () => {
+function MySearchForm() {
+  let close = useClose();
+
   return (
-    <Disclosure as="div" className="border rounded-md p-2">
-      {({ open }: { open: boolean }) => (
-        <>
-          <DisclosureButton className="flex items-center justify-between w-full p-2 text-left text-gray-900 bg-gray-100 rounded-md hover:bg-gray-200">
-            <span>Do you offer technical support?</span>
-            <ChevronDownIcon
-              className={clsx("w-5 transition-transform", open && "rotate-180")}
-            />
-          </DisclosureButton>
-          <DisclosurePanel className="p-2 text-gray-700">
-            No, we currently do not offer technical support.
-          </DisclosurePanel>
-        </>
-      )}
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        /* Perform search... */
+        close();
+      }}
+    >
+      <input type="search" />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default function Example() {
+  return (
+    <Disclosure>
+      <DisclosureButton >Filters</DisclosureButton>
+      <DisclosurePanel>
+        <MySearchForm />
+        {/* ... */}
+      </DisclosurePanel>
     </Disclosure>
   );
-};
-
-export default Example;
+}
