@@ -1,28 +1,44 @@
 "use client";
+import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
+import Link from "next/link";
+import { FC } from "react";
 
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+// Define the props for MyCustomLink using TypeScript
+interface MyCustomLinkProps {
+  href: string;
+  onClick: () => void;
+  children: React.ReactNode;
+}
 
-export default function Example() {
+// Custom Link Component
+const MyCustomLink: FC<MyCustomLinkProps> = ({ href, onClick, children }) => {
   return (
-    <Menu>
-      <MenuButton>My account</MenuButton>
-      <MenuItems anchor={{ to: "bottom start", gap: "4px" }}>
+    <Link href={href} className="text-blue-500" onClick={() => onClick()}>
+      {children}
+    </Link>
+  );
+};
+
+const Example: FC = () => {
+  return (
+    <Menu as="div" className="relative inline-block text-left">
+      <MenuButton className="p-2 bg-blue-500 text-white rounded-md">
+        Terms
+      </MenuButton>
+      <MenuItems
+        as="div"
+        className="absolute mt-2 w-48 bg-white border shadow-lg rounded-md"
+      >
         <MenuItem>
-          <a className="block data-[focus]:bg-blue-100" href="/settings">
-            Settings
-          </a>
-        </MenuItem>
-        <MenuItem>
-          <a className="block data-[focus]:bg-blue-100" href="/support">
-            Support
-          </a>
-        </MenuItem>
-        <MenuItem>
-          <a className="block data-[focus]:bg-blue-100" href="/license">
-            License
-          </a>
+          {({ close }) => (
+            <MyCustomLink href="/" onClick={() => close()}>
+              Read and accept
+            </MyCustomLink>
+          )}
         </MenuItem>
       </MenuItems>
     </Menu>
   );
-}
+};
+
+export default Example;
