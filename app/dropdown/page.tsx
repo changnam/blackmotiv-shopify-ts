@@ -1,65 +1,46 @@
+"use client";
+
+
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import {
-  ArchiveBoxXMarkIcon,
-  ChevronDownIcon,
-  PencilIcon,
-  Square2StackIcon,
-  TrashIcon,
-} from "@heroicons/react/16/solid";
 
 export default function Example() {
-  return (
-    <div className="fixed top-24 w-52 text-right">
-      <Menu>
-        <MenuButton className="inline-flex items-center gap-2 rounded-md bg-gray-800 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-black/10 focus:outline-none data-[hover]:bg-gray-700 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-black">
-          Options
-          <ChevronDownIcon className="size-4 fill-white/60" />
-        </MenuButton>
+  function showSettingsDialog() {
+    alert("Open settings dialog!");
+  }
 
-        <MenuItems
-          transition
-          anchor="bottom end"
-          className="w-52 origin-top-right rounded-xl border border-black/5 bg-black/5 p-1 text-sm/6 text-black transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
-        >
+  return (
+    <Menu>
+      <MenuButton>My account</MenuButton>
+      <MenuItems anchor="bottom">
+        <MenuItem>
+          <button
+            onClick={showSettingsDialog}
+            className="block w-full text-left data-[focus]:bg-blue-100"
+          >
+            Settings
+          </button>
+        </MenuItem>
+        <MenuItem>
+          <a className="block data-[focus]:bg-blue-100" href="/support">
+            Support
+          </a>
+        </MenuItem>
+        <MenuItem>
+          <a className="block data-[focus]:bg-blue-100" href="/license">
+            License
+          </a>
+        </MenuItem>
+        <form action="/logout" method="post">
           <MenuItem>
-            <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-black/10">
-              <PencilIcon className="size-4 fill-black/30" />
-              Edit
-              <kbd className="ml-auto hidden font-sans text-xs text-black/50 group-data-[focus]:inline">
-                ⌘E
-              </kbd>
+            <button
+              type="submit"
+              className="block w-full text-left data-[focus]:bg-blue-100"
+            >
+              Sign out
             </button>
           </MenuItem>
-          <MenuItem>
-            <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-black/10">
-              <Square2StackIcon className="size-4 fill-black/30" />
-              Duplicate
-              <kbd className="ml-auto hidden font-sans text-xs text-black/50 group-data-[focus]:inline">
-                ⌘D
-              </kbd>
-            </button>
-          </MenuItem>
-          <div className="my-1 h-px bg-black/5" />
-          <MenuItem>
-            <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-black/10">
-              <ArchiveBoxXMarkIcon className="size-4 fill-black/30" />
-              Archive
-              <kbd className="ml-auto hidden font-sans text-xs text-black/50 group-data-[focus]:inline">
-                ⌘A
-              </kbd>
-            </button>
-          </MenuItem>
-          <MenuItem>
-            <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-black/10">
-              <TrashIcon className="size-4 fill-black/30" />
-              Delete
-              <kbd className="ml-auto hidden font-sans text-xs text-black/50 group-data-[focus]:inline">
-                ⌘D
-              </kbd>
-            </button>
-          </MenuItem>
-        </MenuItems>
-      </Menu>
-    </div>
+        </form>
+      </MenuItems>
+    </Menu>
   );
 }
