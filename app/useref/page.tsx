@@ -1,19 +1,30 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
-export default function PreviousStateExample() {
-    console.log("PreviousStateExample started.");
+import { useRef, useState } from "react";
+export default function TimerComponent() {
+  console.log("TimerComponent started.");
   const [count, setCount] = useState(0);
-  const prevCountRef = useRef<number | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    prevCountRef.current = count; // mount 된 이후에 실행되므로 화면에 표시된 값은 count: 0, prevCount: N/A 이고, 이후에 여기 값이 0으로 바뀜. 즉, mount 이후에 값을 조작하지만 화면에는 영향을 미치지 않음
-  }, [count]);
+  const startTimer = () => {
+    if (!timerRef.current) {
+      timerRef.current = setInterval(() => {
+        setCount((prev) => prev + 1);
+      }, 1000);
+    }
+  };
+
+  const stopTimer = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  };
 
   return (
     <div>
-      <p>Current Count: {count} </p>
-      <p>Previous Count: {prevCountRef.current ?? "N/A"}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <p> Timer: {count} </p>
+      <button onClick={startTimer}>Start</button>
+      <button onClick={stopTimer}>Stop</button>
     </div>
   );
 }
