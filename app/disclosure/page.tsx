@@ -3,17 +3,16 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 export default function Example() {
   return (
     <Disclosure>
-      <DisclosureButton className="py-2 text-black">
-        Is team pricing available?
+      <DisclosureButton className="group flex items-center gap-2">
+        Do you offer technical support?
+        <ChevronDownIcon className="w-5 group-data-[open]:rotate-180" />
       </DisclosureButton>
-      <DisclosurePanel className="text-gray-500">
-        Yes! You can purchase a license that you can share with your entire
-        team.
-      </DisclosurePanel>
+      <DisclosurePanel>No</DisclosurePanel>
     </Disclosure>
   );
 }
