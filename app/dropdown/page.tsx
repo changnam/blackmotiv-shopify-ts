@@ -1,7 +1,7 @@
 "use client";
 
 
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { Menu, MenuButton, MenuItem, MenuItems, MenuSeparator } from "@headlessui/react";
 
 export default function Example() {
   function showSettingsDialog() {
@@ -25,6 +25,7 @@ export default function Example() {
             Support
           </a>
         </MenuItem>
+        <MenuSeparator className="my-1 h-px bg-black" />
         <MenuItem>
           <a className="block data-[focus]:bg-blue-100" href="/license">
             License
