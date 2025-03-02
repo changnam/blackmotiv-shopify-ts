@@ -1,7 +1,14 @@
 "use client";
 
-
-import { Menu, MenuButton, MenuItem, MenuItems, MenuSeparator } from "@headlessui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuHeading,
+  MenuItem,
+  MenuItems,
+  MenuSection,
+  MenuSeparator,
+} from "@headlessui/react";
 
 export default function Example() {
   function showSettingsDialog() {
@@ -12,35 +19,45 @@ export default function Example() {
     <Menu>
       <MenuButton>My account</MenuButton>
       <MenuItems anchor="bottom">
-        <MenuItem>
-          <button
-            onClick={showSettingsDialog}
-            className="block w-full text-left data-[focus]:bg-blue-100"
-          >
-            Settings
-          </button>
-        </MenuItem>
-        <MenuItem>
-          <a className="block data-[focus]:bg-blue-100" href="/support">
-            Support
-          </a>
-        </MenuItem>
-        <MenuSeparator className="my-1 h-px bg-black" />
-        <MenuItem>
-          <a className="block data-[focus]:bg-blue-100" href="/license">
-            License
-          </a>
-        </MenuItem>
-        <form action="/logout" method="post">
+        <MenuSection>
+          <MenuHeading className="text-sm opacity-50">Settings</MenuHeading>
           <MenuItem>
             <button
-              type="submit"
+              onClick={showSettingsDialog}
               className="block w-full text-left data-[focus]:bg-blue-100"
             >
-              Sign out
+              Settings
             </button>
           </MenuItem>
-        </form>
+          <MenuItem>
+            <a className="block data-[focus]:bg-blue-100" href="/support">
+              Support
+            </a>
+          </MenuItem>
+        </MenuSection>
+        <MenuSeparator className="my-1 h-px bg-black" />
+        <MenuSection>
+          <MenuHeading className="text-sm opacity-50">License</MenuHeading>
+          <MenuItem>
+            <a className="block data-[focus]:bg-blue-100" href="/license">
+              License
+            </a>
+          </MenuItem>
+        </MenuSection>
+        <MenuSeparator className="my-1 h-px bg-black" />
+        <MenuSection>
+          <MenuHeading className="text-sm opacity-50"></MenuHeading>
+          <form action="/logout" method="post">
+            <MenuItem>
+              <button
+                type="submit"
+                className="block w-full text-left data-[focus]:bg-blue-100"
+              >
+                Sign out
+              </button>
+            </MenuItem>
+          </form>
+        </MenuSection>
       </MenuItems>
     </Menu>
   );
