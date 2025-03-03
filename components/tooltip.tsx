@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 
 interface TooltipProps {
   text: string;
-  targetRef: React.RefObject<HTMLDivElement> ;
+  targetRef: React.RefObject<HTMLDivElement | null> ;
 }
 
 const Tooltip: React.FC<TooltipProps> = ({ text, targetRef }) => {
-  if (!targetRef.current) return null;
+  if (!targetRef?.current) return null;
 
   const { top, left, width } = targetRef.current.getBoundingClientRect();
 
