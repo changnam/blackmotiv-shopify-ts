@@ -6,7 +6,7 @@ import { Fragment } from "react";
 
 export default function Example() {
  return (
-   <TabGroup manual>
+   <TabGroup manual defaultIndex={2}>
      <TabList>
        <Tab>Tab 1</Tab>
        <Tab>Tab 2</Tab>
