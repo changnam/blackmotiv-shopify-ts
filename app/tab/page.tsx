@@ -1,20 +1,51 @@
+"use client";
+
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import clsx from "clsx";
+import { Fragment } from "react";
 
 export default function Example() {
   return (
     <TabGroup>
-      <TabList>
-        <Tab className="data-[selected]:bg-blue-500 data-[selected]:text-white data-[hover]:underline">
-          Tab 1
+      <TabList as="aside">
+        <Tab as={Fragment}>
+          {({ hover, selected }) => (
+            <button
+              className={clsx(
+                hover && "underline",
+                selected && "bg-blue-500 text-white"
+              )}
+            >
+              Tab 1
+            </button>
+          )}
         </Tab>
-        <Tab className="data-[selected]:bg-blue-500 data-[selected]:text-white data-[hover]:underline">
-          Tab 2
+        <Tab as={Fragment}>
+          {({ hover, selected }) => (
+            <button
+              className={clsx(
+                hover && "underline",
+                selected && "bg-blue-500 text-white"
+              )}
+            >
+              Tab 2
+            </button>
+          )}
         </Tab>
-        <Tab className="data-[selected]:bg-blue-500 data-[selected]:text-white data-[hover]:underline">
-          Tab 3
+        <Tab as={Fragment}>
+          {({ hover, selected }) => (
+            <button
+              className={clsx(
+                hover && "underline",
+                selected && "bg-blue-500 text-white"
+              )}
+            >
+              Tab 3
+            </button>
+          )}
         </Tab>
       </TabList>
-      <TabPanels>
+      <TabPanels as="section">
         <TabPanel>Content 1</TabPanel>
         <TabPanel>Content 2</TabPanel>
         <TabPanel>Content 3</TabPanel>
