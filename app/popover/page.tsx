@@ -19,12 +19,12 @@ export default function Example() {
         </PopoverPanel>
       </Popover>
 
-      <Popover className="relative">
+      <Popover>
         <PopoverButton>Solutions</PopoverButton>
-        <PopoverBackdrop className="fixed inset-0 bg-black/15" />
         <PopoverPanel
-          anchor={{ to: "bottom start", gap: "4px" }}
-          className="flex flex-col"
+          anchor="bottom"
+          transition
+          className="flex origin-top flex-col transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
         >
           <a href="/analytics">Analytics</a>
           <a href="/engagement">Engagement</a>
