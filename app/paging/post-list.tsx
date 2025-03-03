@@ -12,9 +12,11 @@ export default function PostList({ currentPage }: { currentPage: number }) {
 
   useEffect(() => {
     async function fetchPosts() {
-      const res = await fetch(`http://localhost:8080/api/posts?page=${currentPage}&limit=5`);
+      const res = await fetch(
+        `http://localhost:8080/api/posts?page=${currentPage}&limit=5`
+      );
       const data = await res.json();
-      console.log(data)
+      console.log(data);
       setPosts(data.data.content);
       setTotalPages(data.data.totalPages);
     }
@@ -33,29 +35,36 @@ export default function PostList({ currentPage }: { currentPage: number }) {
     <div>
       <ul className="list-disc">
         {posts.map((post: any) => (
-          <li key={post.id}>{post.title}-{post.content}-{post.published}</li>
+          <li key={post.id}>
+            {post.title}-{post.content}-{post.published}
+          </li>
         ))}
       </ul>
 
       {/* Pagination Controls */}
       <div className="mt-4 flex gap-2">
         <button
-          disabled={currentPage <= 1}
+          disabled={currentPage <= 0}
           onClick={() => goToPage(currentPage - 1)}
-          className="px-4 py-2 bg-gray-300 rounded"
+          className={clsx(
+            "px-4 py-2 bg-blue-300 rounded",
+            currentPage <= 0 ? "bg-gray-300 text-gray" : ""
+          )}
         >
           Previous
         </button>
 
         <span>
-          Page {currentPage} of {totalPages}
+          Page {currentPage + 1} of {totalPages}
         </span>
 
         <button
-          disabled={currentPage >= totalPages}
+          disabled={currentPage >= totalPages -1}
           onClick={() => goToPage(currentPage + 1)}
-          className={clsx("px-4 py-2 bg-blue-500 text-white rounded",
-                currentPage >= totalPages ? "bg-gray-300 text-gray" : "")}
+          className={clsx(
+            "px-4 py-2 bg-blue-500 text-white rounded",
+            currentPage >= totalPages -1 ? "bg-gray-300 text-gray" : ""
+          )}
         >
           Next
         </button>
