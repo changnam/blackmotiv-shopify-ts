@@ -4,9 +4,14 @@ import {
   Dialog,
   DialogPanel,
   DialogTitle,
+  useClose,
 } from "@headlessui/react";
 import { useState } from "react";
 
+function MyButton() {
+  let close = useClose();
+  return <button onClick={() => close()}>Close dialog</button>;
+}
 export default function Example() {
   let [isOpen, setIsOpen] = useState(false);
 
@@ -32,6 +37,7 @@ export default function Example() {
               <button onClick={() => setIsOpen(false)}>Cancel</button>
               <button onClick={() => setIsOpen(false)}>Deactivate</button>
             </div>
+            <MyButton/>
           </DialogPanel>
         </div>
       </Dialog>
