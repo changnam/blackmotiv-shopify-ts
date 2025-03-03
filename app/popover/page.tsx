@@ -1,36 +1,27 @@
 "use client";
 
-import {
-  Popover,
-  PopoverButton,
-  PopoverPanel,
-  useClose,
-} from "@headlessui/react";
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+import { forwardRef } from "react";
 
-function MySearchForm() {
-  let close = useClose();
-
-  return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        /* Perform search... */
-        close();
-      }}
-    >
-      <input type="search" />
-      <button type="submit">Submit</button>
-    </form>
-  );
-}
+let MyCustomButton = forwardRef(function (props, ref) {
+  return <button className="..." ref={ref} {...props} />;
+});
 
 export default function Example() {
   return (
-    <Popover>
-      <PopoverButton>Filters</PopoverButton>
-      <PopoverPanel>
-        <MySearchForm />
-        {/* ... */}
+    <Popover as="nav">
+      <PopoverButton as={MyCustomButton}>Solutions</PopoverButton>
+      <PopoverPanel as="form">
+        {({ close }) => (
+          <button
+            onClick={async () => {
+              await fetch("/accept-terms", { method: "POST" });
+              close();
+            }}
+          >
+            Read and accept
+          </button>
+        )}
       </PopoverPanel>
     </Popover>
   );
