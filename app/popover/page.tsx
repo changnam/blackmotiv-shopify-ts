@@ -1,26 +1,22 @@
-
-"use client";
-
-import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import clsx from "clsx";
+import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from "@headlessui/react";
 
 export default function Example() {
   return (
-    <Popover as="div">
-      {({ open }) => (
-        <>
-          <PopoverButton className="flex items-center gap-2">
-            Solutions
-            <ChevronDownIcon className={clsx("size-5", open && "rotate-180")} />
-          </PopoverButton>
-          <PopoverPanel anchor="bottom" className="flex flex-col">
-            <a href="/insights">Insights</a>
-            <a href="/automations">Automations</a>
-            <a href="/reports">Reports</a>
-          </PopoverPanel>
-        </>
-      )}
-    </Popover>
+    <PopoverGroup>
+      <Popover>
+        <PopoverButton>Product</PopoverButton>
+        <PopoverPanel><div>상품품</div>{/* ... */}</PopoverPanel>
+      </Popover>
+
+      <Popover>
+        <PopoverButton>Solutions</PopoverButton>
+        <PopoverPanel><div>솔루션션</div>{/* ... */}</PopoverPanel>
+      </Popover>
+
+      <Popover>
+        <PopoverButton>Pricing</PopoverButton>
+        <PopoverPanel><div>가격격</div>{/* ... */}</PopoverPanel>
+      </Popover>
+    </PopoverGroup>
   );
 }
