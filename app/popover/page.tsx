@@ -5,17 +5,31 @@ export default function Example() {
     <PopoverGroup>
       <Popover>
         <PopoverButton>Product</PopoverButton>
-        <PopoverPanel><div>상품품</div>{/* ... */}</PopoverPanel>
+        <PopoverPanel>
+          <div>상품품</div>
+          {/* ... */}
+        </PopoverPanel>
       </Popover>
 
       <Popover>
         <PopoverButton>Solutions</PopoverButton>
-        <PopoverPanel><div>솔루션션</div>{/* ... */}</PopoverPanel>
+        <PopoverPanel>
+          <div>솔루션션</div>
+          {/* ... */}
+        </PopoverPanel>
       </Popover>
 
-      <Popover>
-        <PopoverButton>Pricing</PopoverButton>
-        <PopoverPanel><div>가격격</div>{/* ... */}</PopoverPanel>
+      <Popover className="relative">
+        <PopoverButton>Solutions</PopoverButton>
+        <PopoverPanel
+          anchor={{ to: "bottom start", gap: "4px" }}
+          className="flex flex-col"
+        >
+          <a href="/analytics">Analytics</a>
+          <a href="/engagement">Engagement</a>
+          <a href="/security">Security</a>
+          <a href="/integrations">Integrations</a>
+        </PopoverPanel>
       </Popover>
     </PopoverGroup>
   );
