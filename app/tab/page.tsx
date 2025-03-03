@@ -6,7 +6,13 @@ import { Fragment } from "react";
 
 export default function Example() {
  return (
-   <TabGroup manual defaultIndex={2}>
+   <TabGroup
+     manual
+     defaultIndex={2}
+     onChange={(index) => {
+       console.log("Changed selected tab to:", index);
+     }}
+   >
      <TabList>
        <Tab>Tab 1</Tab>
        <Tab>Tab 2</Tab>
