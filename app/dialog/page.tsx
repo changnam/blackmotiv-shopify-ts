@@ -2,6 +2,7 @@
 import {
   Description,
   Dialog,
+  DialogBackdrop,
   DialogPanel,
   DialogTitle,
   useClose,
@@ -23,6 +24,9 @@ export default function Example() {
         onClose={() => setIsOpen(false)}
         className="relative z-50"
       >
+        {/* The backdrop, rendered as a fixed sibling to the panel container */}
+        <DialogBackdrop className="fixed inset-0 bg-black/30" />
+
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
           <DialogPanel className="max-w-lg space-y-4 border bg-white p-12">
             <DialogTitle className="font-bold">Deactivate account</DialogTitle>
@@ -37,7 +41,7 @@ export default function Example() {
               <button onClick={() => setIsOpen(false)}>Cancel</button>
               <button onClick={() => setIsOpen(false)}>Deactivate</button>
             </div>
-            <MyButton/>
+            <MyButton />
           </DialogPanel>
         </div>
       </Dialog>
