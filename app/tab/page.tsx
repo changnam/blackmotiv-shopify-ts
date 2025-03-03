@@ -6,8 +6,8 @@ import { Fragment } from "react";
 
 export default function Example() {
   return (
-    <TabGroup>
-      <TabList as="aside">
+    <TabGroup vertical>
+      <TabList as="aside" className="flex flex-col">
         <Tab as={Fragment}>
           {({ hover, selected }) => (
             <button
