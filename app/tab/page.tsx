@@ -4,9 +4,15 @@ export default function Example() {
   return (
     <TabGroup>
       <TabList>
-        <Tab>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
+        <Tab className="data-[selected]:bg-blue-500 data-[selected]:text-white data-[hover]:underline">
+          Tab 1
+        </Tab>
+        <Tab className="data-[selected]:bg-blue-500 data-[selected]:text-white data-[hover]:underline">
+          Tab 2
+        </Tab>
+        <Tab className="data-[selected]:bg-blue-500 data-[selected]:text-white data-[hover]:underline">
+          Tab 3
+        </Tab>
       </TabList>
       <TabPanels>
         <TabPanel>Content 1</TabPanel>
