@@ -20,7 +20,7 @@ export default function Example() {
             </button>
           )}
         </Tab>
-        <Tab as={Fragment}>
+        <Tab as={Fragment} disabled className="disabled:opacity-50">
           {({ hover, selected }) => (
             <button
               className={clsx(
