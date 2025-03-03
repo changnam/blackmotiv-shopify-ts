@@ -1,4 +1,4 @@
-import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from "@headlessui/react";
+import { Popover, PopoverBackdrop, PopoverButton, PopoverGroup, PopoverPanel } from "@headlessui/react";
 
 export default function Example() {
   return (
@@ -21,6 +21,7 @@ export default function Example() {
 
       <Popover className="relative">
         <PopoverButton>Solutions</PopoverButton>
+        <PopoverBackdrop className="fixed inset-0 bg-black/15" />
         <PopoverPanel
           anchor={{ to: "bottom start", gap: "4px" }}
           className="flex flex-col"
