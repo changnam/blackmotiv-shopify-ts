@@ -7,7 +7,7 @@ export function SlideExample() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <>
+    <div>
       <button onClick={() => setIsOpen((prev) => !prev)}>toggle</button>
       <div className="relative">
         <Dialog
@@ -26,6 +26,6 @@ export function SlideExample() {
           </DialogPanel>
         </Dialog>
       </div>
-    </>
+    </div>
   );
 }
