@@ -7,7 +7,7 @@ function untangle(){
   return 1;
 }
 export default function LazyInitPage(){
-  const [shiny, setShiny] = useState(untangle());
+  const [shiny, setShiny] = useState(() => untangle());
 
   async function increment(){
     const delayPromise = new Promise((resolve,reject) => setTimeout(() => resolve("blabla"),5000));
