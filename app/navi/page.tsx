@@ -1,3 +1,5 @@
+import { SearchForm } from "@/components/search-form";
+
 export default function NavHome(){
   return (
     <div className="flex min-h-4">
@@ -14,9 +16,13 @@ export default function NavHome(){
         </svg>
       </div>
       <div className="flex w-full">
-        <div className="flex w-1/3 bg-green-300"></div>
-        <div className="flex w-1/3 bg-pink-300"></div>
-        <div className="flex w-1/3 bg-yellow-300"></div>
+        <div className="flex w-1/3 bg-green-300 md:hidden">
+        
+        </div>
+        <div className="flex justify-center w-1/3 bg-pink-300">
+          <SearchForm/>
+        </div>
+        <div className="flex justify-end w-1/3 bg-yellow-300"></div>
       </div>
     </div>
   );
