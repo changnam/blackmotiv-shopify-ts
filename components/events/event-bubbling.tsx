@@ -11,6 +11,7 @@ export function EventBubbling(){
   const onButtonClick = (e: SyntheticEvent) => {
     const {isTrusted, target, bubbles, currentTarget} = e;
     console.log("click event starts at <button>",isTrusted, target, bubbles, currentTarget);
+    e.stopPropagation();
 
   }
   return (
