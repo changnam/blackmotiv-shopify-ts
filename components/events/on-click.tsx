@@ -1,17 +1,34 @@
 "use client";
 
-import { SyntheticEvent, useEffect } from "react";
+import { useEffect } from "react";
 
 export function OnClick() {
-  const onClick = (e: SyntheticEvent) => {
-    const { isTrusted, target, bubbles } = e;
-    console.log("mouse click occurs on <button>", isTrusted, target, bubbles);
-  };
+  useEffect(() => {
+    const rootElement = document.getElementById("root");
+    if (rootElement) {
+      rootElement.onclick = (e: Event) => {
+        const { isTrusted, target, bubbles } = e;
+        console.log(
+          "mouse click occurs on rootElement",
+          isTrusted,
+          target,
+          bubbles
+        );
+      };
 
-  return (
-    <div>
-      <p>ReactOnClick</p>
-      <button onClick={onClick}>Click Me</button>
-    </div>
-  );
+      rootElement.onclick = (e: Event) => {
+        const { isTrusted, target, bubbles } = e;
+        console.log(
+          "moduse click also occurs on rootElement",
+          isTrusted,
+          target,
+          bubbles
+        );
+      };
+    } else {
+      console.log("rootElement is null");
+    }
+  }, []);
+
+  return <div>OnClick</div>;
 }
