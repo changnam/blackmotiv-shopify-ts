@@ -17,6 +17,13 @@ export function VariousInputs() {
   const onChangeFiles = (e: ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
     console.log("onChangeFiles",e.target.files);
+    const files = e.target.files;
+    if (files) {
+      for (let i=0; i<files.length; i++){
+        const file = files[i];
+        console.log("file[${i}]: ",file);
+      }
+    }
   }
 
   return (
