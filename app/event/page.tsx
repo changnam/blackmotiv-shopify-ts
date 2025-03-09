@@ -1,4 +1,5 @@
 import { DispatchEvent } from "@/components/events/dispatch-event";
+import { DragDrop } from "@/components/events/drag-drop";
 import { EventBubbling } from "@/components/events/event-bubbling";
 import { OnClick } from "@/components/events/on-click";
 import { ReactOnClick } from "@/components/events/react-on-click";
@@ -12,6 +13,7 @@ export default function EventPage() {
       <DispatchEvent /> */}
       <EventBubbling/>
       <VariousInputs/>
+      <DragDrop/>
     </div>
   );
 }
